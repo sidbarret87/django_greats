@@ -19,6 +19,9 @@ from greats.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('greats/', include('greats.urls'))
+    path('', include('greats.urls'))
 
 ]
+# Обработчик для 404
+
+handler404= pageNotFound
