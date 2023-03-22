@@ -9,10 +9,13 @@ menu =[
 ]
 def index(request):
     posts= Greats.objects.all().order_by('title')
+    categories=Category.objects.all()
     context= {
         'posts': posts,
         'menu': menu,
-        'title': 'Главная страница.'
+        'title': 'Главная страница.',
+        'cat_selected':0,
+        'categories':categories
     }
     return render (request, 'greats/index.html', context=context)
 def about(request):
@@ -29,3 +32,18 @@ def show_post(reguest, post_id):
 def pageNotFound(reguest, exception):
     return HttpResponseNotFound("<h1>Страница не найдена</h1>")
 
+
+def show_category(request,cat_id):
+    posts = Greats.objects.filter(cat_id=cat_id)
+    categories = Category.objects.all()
+
+    if len(posts)==0:
+        raise Http404()
+    context = {
+        'posts': posts,
+        'menu': menu,
+        'title': 'Отображение по рубрикам',
+        'cat_selected': cat_id,
+        'categories': categories
+    }
+    return render(request, 'greats/index.html', context=context)
