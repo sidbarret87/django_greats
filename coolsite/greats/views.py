@@ -8,7 +8,7 @@ menu =[
     {'title':'Войти', 'url_name':'login'},
 ]
 def index(request):
-    posts= Greats.objects.all().order_by('title')
+    posts= Greats.objects.all()
     categories=Category.objects.all()
     context= {
         'posts': posts,
