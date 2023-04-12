@@ -35,7 +35,6 @@ def pageNotFound(reguest, exception):
 
 def show_category(request,cat_id):
     posts = Greats.objects.filter(cat_id=cat_id)
-    categories = Category.objects.all()
 
     if len(posts)==0:
         raise Http404()
@@ -44,6 +43,6 @@ def show_category(request,cat_id):
         'menu': menu,
         'title': 'Отображение по рубрикам',
         'cat_selected': cat_id,
-        'categories': categories
+
     }
     return render(request, 'greats/index.html', context=context)
