@@ -8,11 +8,13 @@ class GreatsAdmin(admin.ModelAdmin):
     search_fields = ('title','content')
     list_editable = ('is_published',)
     list_filter = ('is_published', 'time_create')
+    prepopulated_fields = {"slug": ("title",)}
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     list_display_links = ('id', 'name')
     search_fields = ('name',)
+    prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Greats, GreatsAdmin)
 admin.site.register(Category, CategoryAdmin)
