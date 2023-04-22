@@ -1,5 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.shortcuts import render, redirect, get_object_or_404
+
+from .forms import *
 from .models import *
 menu =[
     {'title':'О сайте', 'url_name':'about'},
@@ -21,8 +23,20 @@ def index(request):
 def about(request):
     return render(request, 'greats/about.html', {'menu':menu,'title':'О сайте.'})
 # Create your views here.
-def addpage(reguest):
-    return HttpResponseNotFound("Добавление статьи.")
+def addpage(request):
+     if request.method=='POST':
+         form = AddPostForm(request.POST)
+         if form.is_valid():
+             #print(form.cleaned_data)
+             try:
+                 Greats.objects.create(**form.cleaned_data)
+                 return redirect('home')
+             except:
+                 form.add_error(None,"Ошибка добавления поста")
+
+     else:
+         form = AddPostForm()
+     return render(request, 'greats/addpage.html',{'form':form,'menu':menu, 'title':'Добавление статьи'})
 def contact(reguest):
     return HttpResponseNotFound("Обратная связь.")
 def login(reguest):
