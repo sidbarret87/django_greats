@@ -28,7 +28,7 @@ class Category(models.Model):
     slug = models.SlugField(max_length=255,unique=True, db_index=True, verbose_name="URL" )
 
     def get_absolute_url(self):
-        return reverse('category', kwargs={'cat_id':self.pk})
+        return reverse('category', kwargs={'cat_slug':self.slug})
     class Meta:
         verbose_name="Категория"
         verbose_name_plural='Категории'
