@@ -16,7 +16,8 @@ class Greats(models.Model):
     class Meta:
         verbose_name="Выдающиеся люди"
         verbose_name_plural='Выдающиеся люди'
-        ordering=['-time_create','title'] # если первое поле имеет
+        #c =  Category.objects.annotate(Count('greats'))
+        # ordering=['-time_create','title'] # если первое поле имеет
         # равные значения то включается сортировка по второму полю title
     def __str__(self):
         return self.title

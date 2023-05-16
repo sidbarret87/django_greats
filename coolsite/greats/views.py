@@ -75,7 +75,7 @@ def login(reguest):
 #     }
 #     return render(request, 'greats/post.html',context=context)
 class ShowPost(DetailView):
-    model = Greats
+    model = Greats.
     template_name = 'greats/post.html'
     slug_url_kwarg = 'post_slug'
     context_object_name ='post'
